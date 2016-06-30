@@ -188,7 +188,7 @@ body.bMain {
   }
 
   #wrapper {width:100%;}
-  >header, &.bHome header, #contentwrap, >footer, #contentwrap>footer, div#flash, #contentcontainer, #secondarynav, .contentwrap {
+  >header, #contentwrap, >footer, #contentwrap>footer, div#flash, #contentcontainer, #secondarynav, .contentwrap {
 	padding:0;
 	>.in, >section>.in,
 		>div>section>.in // mobileonly/nomobile
@@ -198,9 +198,6 @@ body.bMain {
 	  	padding: 15px 0;
 	    position:relative;
 	}
-  }
-  &.bHome header >.in {
-	padding:0;
   }
   #contentcontainer {
 	min-height: 500px;
@@ -547,6 +544,37 @@ article.asset.card {
   	border-radius: 4px;
   	position:relative;
 
+	&.new {
+		div.image {
+		  background: #0597cd;
+		  position: relative;
+		  a.action {
+			&.btn.mainaction {
+			  border: 0;
+			  position: absolute;
+			  top:0;
+			  left:0;
+			  right:0;
+			  bottom:0;
+			  display: block;
+			  background: none;
+			  width: auto;
+			  max-width: none;
+			}
+			span {
+			  display: none;
+			}
+			svg {
+			  stroke: #eee;
+			  .center-neg-margin(32px, 32px);
+			}
+			&:hover svg {
+			  stroke: #fff;
+			}
+		  }
+		}
+	}
+
   	div.overlay {
 	  -webkit-flex-flow: column wrap;
 	  flex-flow: column wrap;
@@ -575,7 +603,7 @@ article.asset.card {
 	}
   }
 
-  button.action {
+  button.action, a.btn.action {
 	&.delete,
 	&.share
 	{
@@ -598,9 +626,9 @@ article.asset.card {
   }
 
   button.mainaction, a.btn.mainaction {
+	  letter-spacing: 1px;
 	  -webkit-flex-grow: 0;
 	  flex-grow: 0;
-
 	  width: 7em;
 	  max-width: 7em;
 	  border: 1px solid @color-main-action-button;
@@ -623,14 +651,31 @@ article.asset.card {
 	  span {
 		display: inline-block;
 		margin-left: -2px;
-
 		vertical-align: middle;
 		transition: margin-left 0.1s ease-in;
 		line-height: 22px;
 	  }
+	&.expand {
+	  span {
+		margin-left: 2px;
+	  }
+	}
   }
 
-	button.mainaction:not(.new), a.btn.mainaction:not(.new) {
+  .mainaction.view {
+	svg {
+	  fill: #afbfdf;
+	}
+	&:hover {
+	  border-color: #fff;
+	  color: #fff;
+	  svg {
+		fill: #fff;
+	  }
+	}
+  }
+
+	button.mainaction:not(.new, .expand), a.btn.mainaction:not(.new, .expand) {
 	  width: 35px;
 	  padding: 4px 2px;
 	  transition: width 0.1s ease-out;
@@ -655,6 +700,7 @@ article.asset.card {
 		}
 	  }
 	}
+
 
   	>div {
 	  position:absolute;
@@ -731,7 +777,7 @@ article.asset.card {
 	}
 
   button.svg>svg, a.btn.svg>svg  {
-	stroke: #afbfdf !important;
+	stroke: #afbfdf;
   }
 
   .toggleWrap, .toggleWrap * {
@@ -865,7 +911,7 @@ form.loading button.withWaitState.spinner {
   font-weight: 400;
 }
 
-.bProfile form button {
+.bProfile form button, .bProfile form a.btn {
   >svg {
 	max-width: 20px;
 	max-height: 20px;
@@ -1395,6 +1441,20 @@ body.bMain.bProfile #contentwrap #contentcontainer {
 	margin-top: 0;
   }
 
+  form button, a.btn {
+	font-size: 16px;
+	line-height: 23px;
+	font-weight: 500;
+	padding: 10px 20px;
+	color: #ffffff;
+	background: #0597cd;
+	border-radius: 4px;
+	border: none;
+	svg {
+	  stroke: #fff;
+	}
+  }
+
   form {
 	label {
 	  color: #9b9b9b;
@@ -1420,19 +1480,6 @@ body.bMain.bProfile #contentwrap #contentcontainer {
 	  border-radius: 4px;
 	  font-size: 16px;
 	  padding: 10px;
-	}
-	button {
-	  font-size: 16px;
-	  line-height: 23px;
-	  font-weight: 500;
-	  padding: 10px 20px;
-	  color: #ffffff;
-	  background: #0597cd;
-	  border-radius: 4px;
-	  border: none;
-	  svg {
-		stroke: #fff;
-	  }
 	}
 	p.explain {
 	  font-size:14px;
@@ -1478,7 +1525,7 @@ body.bMain.bProfile #contentwrap #contentcontainer {
 
 
 article.card {
-  button.action {
+  button.action, a.btn.action {
 	&.tiny svg {
 		width: 24px;
 		height: 24px;
@@ -1502,7 +1549,7 @@ article.card {
 	  border-bottom-right-radius: @share-border-radius;
 	}
   }
-  .modal-dialog, header, button {
+  .modal-dialog, header, button, a.btn {
 	-webkit-font-smoothing: subpixel-antialiased;
 	font-smoothing: subpixel-antialiased;
   }

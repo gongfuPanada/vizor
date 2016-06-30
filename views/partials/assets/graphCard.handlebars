@@ -3,7 +3,7 @@
 
 {{#*inline 'action'}}
     {{!-- context graph --}}
-    <a class="btn action {{#if main}}mainaction{{/if}} {{act}} svg" data-action="{{act}}" href="{{path}}" data-svgref="{{svg}}">
+    <a class="btn action {{#if main}}mainaction{{/if}} {{act}} svg {{class}}" data-action="{{act}}" href="{{path}}" data-svgref="{{svg}}">
         <svg />
         <span>{{#if text}}{{text}}{{else}}{{act}}{{/if}}</span>
     </a>
@@ -14,7 +14,9 @@
 <article class="graph asset card noselect" data-objectid="{{_id}}" data-sortid="{{updatedTS}}" data-url="/{{owner}}/{{name}}" data-asset-type="graph">
 
 	<div class="meta scrollbar">
-		<h4 class="editable" data-svgref="icon-ca-rename">{{prettyName}}</h4>
+		<h4 class="editable" data-svgref="icon-ca-rename">
+            <a href="{{path}}">{{prettyName}}</a>
+        </h4>
 		<p class="description user">
             <a style="margin-right:0.5em;color:#666;" href="/{{owner}}">@{{owner}}</a>
         </p>
@@ -35,15 +37,19 @@
             {{/if}}
 
             <div class="mainActionsWrap">
-            {{> action main=true act='view' text='View' svg='card-icon-view' }}
+
 
             {{#eq visitor.username this.owner}}
+                {{> action main=true act='view' text='View' svg='eye-21x13' }}
                 {{> action main=true text='Edit' act='edit' svg='player-icon-edit' path=(concat path '/edit') }}
             {{else}}
+                {{> action main=true act='view' text='View' svg='eye-21x13' class='expand' }}
                 {{!-- in case this ever gets listed --}}
+                {{!--
                 {{#not-eq this.private true}}
                     {{> action main=true text='Edit' act='edit' svg='player-icon-edit' path=(concat path '/edit') }}
                 {{/not-eq}}
+                --}}
             {{/eq}}
             </div>
 
